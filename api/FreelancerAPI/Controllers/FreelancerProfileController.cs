@@ -19,19 +19,41 @@ namespace FreelancerAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProfile(FreelancerProfile profile)
+        public IActionResult CreateOrUpdateProfile(FreelancerProfile profile)
         {
-            var userId = int.Parse(
-                User.FindFirst(ClaimTypes.NameIdentifier)?.Value
-            );
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            profile.UserId = userId;
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
 
-            _context.FreelancerProfiles.Add(profile);
+            var userId = int.Parse(userIdClaim);
+
+            var existingProfile = _context.FreelancerProfiles
+                .FirstOrDefault(p => p.UserId == userId);
+
+            if (existingProfile == null)
+            {
+                profile.UserId = userId;
+
+                _context.FreelancerProfiles.Add(profile);
+            }
+            else
+            {
+                existingProfile.Bio = profile.Bio;
+                existingProfile.Skills = profile.Skills;
+                existingProfile.Experience = profile.Experience;
+
+                existingProfile.UpdatedAt = DateTime.Now;
+            }
 
             _context.SaveChanges();
 
-            return Ok(profile);
+            var savedProfile = _context.FreelancerProfiles
+                .FirstOrDefault(p => p.UserId == userId);
+
+            return Ok(savedProfile);
         }
 
         [HttpGet]
