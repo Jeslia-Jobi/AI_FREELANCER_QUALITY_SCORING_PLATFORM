@@ -1,0 +1,158 @@
+<main class="dashboard-page">
+
+  <section class="dashboard-header">
+
+    <div>
+      <h1>Freelancer Dashboard</h1>
+      <p>Manage your profile and browse projects.</p>
+    </div>
+
+  </section>
+
+  <section class="dashboard-grid">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+      <section class="profile-card">
+
+        <h2>My Profile</h2>
+
+        <div class="profile-info">
+
+          <div>
+            <span class="label">Overall Score</span>
+            <strong>{{ profile.overallScore }}</strong>
+          </div>
+
+          <div>
+            <span class="label">Completed Projects</span>
+            <strong>{{ profile.completedProjects }}</strong>
+          </div>
+
+          <div>
+            <span class="label">Rating</span>
+            <strong>{{ profile.rating }}</strong>
+          </div>
+
+        </div>
+
+        <div class="profile-content">
+
+          <h3>Bio</h3>
+  
+          @if (profile.bio) {
+            <p>{{ profile.bio }}</p>
+          } @else {
+            <p>No bio added yet.</p>
+          }
+
+          <h3>Skills</h3>
+
+          @if (profile.skills) {
+            <p>{{ profile.skills }}</p>
+          } @else {
+            <p>No skills added yet.</p>
+          }
+
+          <h3>Experience</h3>
+
+          @if (profile.experience) {
+            <p>{{ profile.experience }}</p>
+          } @else {
+            <p>No experience added yet.</p>
+          }
+        </div>
+
+        <button
+          type="button"
+          (click)="showEditForm = !showEditForm"
+        >
+          {{ showEditForm ? 'Close Form' : 'Edit Profile' }}
+        </button>
+
+      </section>
+
+      @if (showEditForm) {
+
+        <section class="edit-form-card">
+
+          <h2>Edit Profile</h2>
+
+          <textarea
+            [(ngModel)]="profile.bio"
+            placeholder="Bio"
+          ></textarea>
+
+          <textarea
+            [(ngModel)]="profile.skills"
+            placeholder="Skills"
+          ></textarea>
+
+          <textarea
+            [(ngModel)]="profile.experience"
+            placeholder="Experience"
+          ></textarea>
+
+          <button (click)="saveProfile()">
+            Save Profile
+          </button>
+
+        </section>
+
+      }
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+      <section class="projects-header">
+
+        <h2>Available Projects</h2>
+
+        <span>
+          {{ projects.length }} Projects
+        </span>
+
+      </section>
+
+      <section class="project-list">
+
+        @for (project of projects; track project.projectId) {
+
+          <article class="project-card">
+
+            <h2>{{ project.title }}</h2>
+
+            <p>{{ project.description }}</p>
+
+            <div class="project-meta">
+
+              <span>
+                Budget: Rs. {{ project.budget }}
+              </span>
+
+              <span>
+                Status: {{ project.status }}
+              </span>
+
+            </div>
+
+            <button>
+              Apply
+            </button>
+
+          </article>
+
+        }
+
+      </section>
+
+    </div>
+
+  </section>
+
+</main>

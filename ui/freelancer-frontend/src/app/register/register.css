@@ -1,0 +1,99 @@
+:host {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f3ecdf;
+  color: #001b3f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+  width: min(100%, 420px);
+  padding: 30px;
+  box-sizing: border-box;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: #fffdf8;
+  box-shadow: 0 18px 38px rgba(84, 69, 48, 0.12);
+}
+
+form::before {
+  content: "Register";
+  display: block;
+  margin-bottom: 22px;
+  color: #001b3f;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+input,
+select {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  border: 1px solid #d8d1c6;
+  border-radius: 6px;
+  background: #fffdf8;
+  color: #001b3f;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+select {
+  cursor: pointer;
+}
+
+input:focus,
+select:focus {
+  border-color: #bf5b1f;
+  box-shadow: 0 0 0 3px rgba(191, 91, 31, 0.18);
+}
+
+button {
+  width: 100%;
+  height: 44px;
+  border: 0;
+  border-radius: 6px;
+  background: #bf5b1f;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #9f4215;
+  transform: translateY(-1px);
+}
+
+p {
+  margin: 0;
+  text-align: center;
+  color: #665f55;
+  font-size: 14px;
+}
+
+a {
+  color: #bf5b1f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding: 18px;
+  }
+
+  form {
+    padding: 24px 22px;
+  }
+}

@@ -1,0 +1,42 @@
+<main class="create-page">
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">New project</p>
+      <h1>Create Project</h1>
+      <p>Post a clear project brief for freelancers.</p>
+    </div>
+
+    <button type="button" class="secondary-button" routerLink="/client">Dashboard</button>
+  </section>
+
+  <form [formGroup]="projectForm" (ngSubmit)="submitProject()">
+    <label>
+      <span>Title</span>
+      <input type="text" placeholder="Project title" formControlName="title">
+    </label>
+
+    <label>
+      <span>Description</span>
+      <textarea placeholder="Describe your project" formControlName="description"></textarea>
+    </label>
+
+    <div class="form-grid">
+      <label>
+        <span>Budget</span>
+        <input type="number" placeholder="Budget" formControlName="budget">
+      </label>
+
+      <label>
+        <span>Deadline</span>
+        <input type="date" formControlName="deadline">
+      </label>
+    </div>
+
+    <label>
+      <span>Requirements</span>
+      <textarea placeholder="List skills, and technology expectations" formControlName="requirements"></textarea>
+    </label>
+
+    <button type="submit">Post Project</button>
+  </form>
+</main>

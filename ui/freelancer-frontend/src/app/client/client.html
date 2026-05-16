@@ -1,0 +1,71 @@
+<main class="dashboard-container">
+  <section class="welcome-section">
+    <div>
+      <p class="eyebrow">Client dashboard</p>
+      <h1>Welcome, {{ username }}</h1>
+      <p>Manage your freelance projects and activities.</p>
+    </div>
+
+    <button type="button" routerLink="/create-project">Create Project</button>
+  </section>
+
+  <section class="stats-grid" aria-label="Project stats">
+    <article class="stat-card">
+      <span>Total Projects</span>
+      <strong>{{ totalProjects }}</strong>
+    </article>
+
+    <article class="stat-card">
+      <span>Open Projects</span>
+      <strong>{{ openProjects }}</strong>
+    </article>
+
+    <article class="stat-card">
+      <span>Completed Projects</span>
+      <strong>{{ completedProjects }}</strong>
+    </article>
+  </section>
+
+  <section class="content-grid">
+    <div class="panel actions-section">
+      <div class="section-heading">
+        <p class="eyebrow">Shortcuts</p>
+        <h2>Quick Actions</h2>
+      </div>
+
+      <div class="actions-grid">
+        <button type="button" routerLink="/create-project">Create Project</button>
+        <button type="button" routerLink="/my-projects">My Projects</button>
+        <button type="button">View Proposals</button>
+        <button type="button">Profile</button>
+      </div>
+    </div>
+
+    <div class="panel recent-projects">
+      <div class="section-heading">
+        <p class="eyebrow">Latest work</p>
+        <h2>Recent Projects</h2>
+      </div>
+
+      @if (projects.length === 0) {
+        <p class="empty-state">No projects created yet.</p>
+      }
+
+      <div class="project-list">
+        @for (project of projects; track project.projectId) {
+          <article class="project-card">
+            <div>
+              <h3>{{ project.title }}</h3>
+              <p>{{ project.description }}</p>
+            </div>
+
+            <div class="project-info">
+              <span>Budget: Rs. {{ project.budget }}</span>
+              <span>{{ project.status }}</span>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+</main>

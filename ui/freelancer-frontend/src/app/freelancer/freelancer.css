@@ -1,0 +1,247 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3ecdf;
+  color: #001b3f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dashboard-page {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  padding: 32px 24px;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  padding: 28px;
+  margin-bottom: 22px;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: #fffdf8;
+  box-shadow: 0 18px 38px rgba(84, 69, 48, 0.12);
+}
+
+.dashboard-header h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.dashboard-header p {
+  margin: 0;
+  color: #665f55;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.left-panel,
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-card,
+.edit-form-card,
+.project-card {
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: #fffdf8;
+  box-shadow: 0 18px 38px rgba(84, 69, 48, 0.12);
+}
+
+.profile-card,
+.edit-form-card {
+  padding: 24px;
+}
+
+.project-card {
+  padding: 22px;
+  box-shadow: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.profile-card h2,
+.edit-form-card h2,
+.projects-header h2 {
+  margin-bottom: 18px;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.profile-info div {
+  padding: 18px;
+  border: 1px solid #eee3d5;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  color: #665f55;
+  font-size: 14px;
+}
+
+.profile-info strong {
+  color: #001b3f;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.profile-content h3 {
+  margin-top: 18px;
+  margin-bottom: 6px;
+  color: #bf5b1f;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-content p {
+  margin-bottom: 0;
+  color: #665f55;
+  line-height: 1.5;
+}
+
+textarea {
+  width: 100%;
+  min-height: 110px;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 14px;
+  background: #ffffff;
+  color: #001b3f;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: vertical;
+  margin-bottom: 18px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea:focus {
+  border-color: #bf5b1f;
+  box-shadow: 0 0 0 3px rgba(191, 91, 31, 0.14);
+}
+
+button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 6px;
+  background: #bf5b1f;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #9f4215;
+  transform: translateY(-1px);
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: #fffdf8;
+  box-shadow: 0 18px 38px rgba(84, 69, 48, 0.12);
+}
+
+.projects-header h2 {
+  margin-bottom: 0;
+}
+
+.projects-header span {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #f9ead9;
+  color: #9f4215;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.project-list {
+  display: grid;
+  gap: 14px;
+}
+
+.project-card h2 {
+  margin-bottom: 8px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.project-card p {
+  margin-bottom: 0;
+  color: #665f55;
+  line-height: 1.5;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.project-meta span {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #f9ead9;
+  color: #9f4215;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 950px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .dashboard-page {
+    padding: 22px 18px;
+  }
+
+  .dashboard-header,
+  .profile-card,
+  .edit-form-card,
+  .projects-header,
+  .project-card {
+    padding: 20px;
+  }
+
+  .projects-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

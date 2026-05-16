@@ -1,0 +1,47 @@
+<main class="projects-page">
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">Client workspace</p>
+      <h1>My Projects</h1>
+      <p>Track all projects you have created.</p>
+    </div>
+
+    <button type="button" routerLink="/client">Dashboard</button>
+  </section>
+
+  <section class="summary-card">
+    <span>Total Projects</span>
+    <strong>{{ projects.length }}</strong>
+  </section>
+
+  @if (projects.length === 0) {
+    <section class="empty-state">
+      <h2>No projects yet</h2>
+      <p>Create your first project to start receiving proposals.</p>
+      <button type="button" routerLink="/client">Dashboard</button>
+    </section>
+  }
+
+  <section class="project-list">
+    @for (project of projects; track project.projectId) {
+      <article class="project-card">
+        <div class="project-body">
+          <h2>{{ project.title }}</h2>
+          <p>{{ project.description }}</p>
+
+          @if (project.requirements) {
+            <div class="project-requirements">
+              <span>Requirements</span>
+              <p>{{ project.requirements }}</p>
+            </div>
+          }
+        </div>
+
+        <div class="project-meta">
+          <span>Budget: Rs. {{ project.budget }}</span>
+          <span>Status: {{ project.status }}</span>
+        </div>
+      </article>
+    }
+  </section>
+</main>
