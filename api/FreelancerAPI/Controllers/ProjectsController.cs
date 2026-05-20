@@ -3,6 +3,7 @@ using FreelancerAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using backend.DTOs;
 
 namespace FreelancerAPI.Controllers
 {
@@ -54,6 +55,55 @@ namespace FreelancerAPI.Controllers
         public IActionResult GetAllProjects()
         {
             return Ok(_context.Projects.ToList());
+        }
+
+        [HttpGet("{projectId}/recommendations")]
+        public IActionResult GetRecommendations(int projectId)
+        {
+            var project = _context.Projects.FirstOrDefault(p => p.ProjectId == projectId);
+
+            if (project == null)
+            {
+                return NotFound("Project not found");
+            }
+
+            var requiredSkills = project.Requirements
+                .ToLower()
+                .Split(',')
+                .Select(s => s.Trim())
+                .ToList();
+
+            var freelancers = _context.FreelancerProfiles.ToList();
+
+            var recommendations = freelancers
+                .Select(f =>
+                {
+                    var freelancerSkills = f.Skills
+                        .ToLower()
+                        .Split(',')
+                        .Select(s => s.Trim())
+                        .ToList();
+
+                    int matchedSkills = requiredSkills
+                        .Count(skill => freelancerSkills.Contains(skill));
+
+                    double matchPercentage =
+                        ((double)matchedSkills / requiredSkills.Count) * 100;
+
+                    return new RecommendationDto
+                    {
+                        FreelancerId = f.ProfileId,
+                        UserId = f.UserId,
+                        Bio = f.Bio,
+                        Skills = f.Skills,
+                        MatchPercentage = Math.Round(matchPercentage, 2)
+                    };
+                })
+                .Where(r => r.MatchPercentage > 0)
+                .OrderByDescending(r => r.MatchPercentage)
+                .ToList();
+
+            return Ok(recommendations);
         }
     }
 }
