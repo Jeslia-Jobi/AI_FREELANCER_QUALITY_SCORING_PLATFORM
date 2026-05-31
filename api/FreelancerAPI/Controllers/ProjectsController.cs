@@ -73,12 +73,23 @@ namespace FreelancerAPI.Controllers
                 .Select(s => s.Trim())
                 .ToList();
 
-            var freelancers = _context.FreelancerProfiles.ToList();
+           var freelancerData = _context.FreelancerProfiles
+                .Join(
+                    _context.Users,
+                    freelancer => freelancer.UserId,
+                    user => user.Id,
+                    (freelancer, user) => new
+                    {
+                        Freelancer = freelancer,
+                        Username = user.Username
+                    }
+                )
+                .ToList();
 
-            var recommendations = freelancers
+            var recommendations = freelancerData
                 .Select(f =>
                 {
-                    var freelancerSkills = f.Skills
+                    var freelancerSkills = f.Freelancer.Skills
                         .ToLower()
                         .Split(',')
                         .Select(s => s.Trim())
@@ -92,10 +103,11 @@ namespace FreelancerAPI.Controllers
 
                     return new RecommendationDto
                     {
-                        FreelancerId = f.ProfileId,
-                        UserId = f.UserId,
-                        Bio = f.Bio,
-                        Skills = f.Skills,
+                        FreelancerId = f.Freelancer.ProfileId,
+                        UserId = f.Freelancer.UserId,
+                        Username = f.Username,
+                        Bio = f.Freelancer.Bio,
+                        Skills = f.Freelancer.Skills,
                         MatchPercentage = Math.Round(matchPercentage, 2)
                     };
                 })

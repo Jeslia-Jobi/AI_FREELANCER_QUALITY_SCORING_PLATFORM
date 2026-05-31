@@ -188,6 +188,12 @@ button:hover {
   background: #fdf8f1;
 }
 
+.recommendation-card h4 {
+  margin: 0 0 10px;
+  color: #001b3f;
+  font-size: 18px;
+}
+
 .recommendation-card p {
   margin: 6px 0;
   color: #4b443b;
