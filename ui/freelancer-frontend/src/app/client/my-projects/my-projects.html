@@ -35,6 +35,44 @@
               <p>{{ project.requirements }}</p>
             </div>
           }
+          
+          <div class="recommendation-section">
+
+            <h3>Recommended Freelancers</h3>
+
+            @if (recommendations[project.projectId]) {
+
+              @for (
+                freelancer of recommendations[project.projectId]!;
+                track freelancer.freelancerId
+              ) {
+
+                <div class="recommendation-card">
+                  <h4>{{ freelancer.username }}</h4>
+                  <p>
+                    <strong>Match:</strong>
+                    {{ freelancer.matchPercentage }}%
+                  </p>
+
+                  <p>
+                    <strong>Skills:</strong>
+                    {{ freelancer.skills }}
+                  </p>
+
+                  <p>
+                    {{ freelancer.bio }}
+                  </p>
+
+                </div>
+              }
+
+            } @else {
+              <p>Loading recommendations...</p>
+            }
+
+          </div>
+          
+          
         </div>
 
         <div class="project-meta">
