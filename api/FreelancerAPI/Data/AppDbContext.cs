@@ -10,6 +10,8 @@ namespace FreelancerAPI.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<FreelancerProfile> FreelancerProfiles { get; set; }
 
+        public DbSet<ProjectApplication> ProjectApplications { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
