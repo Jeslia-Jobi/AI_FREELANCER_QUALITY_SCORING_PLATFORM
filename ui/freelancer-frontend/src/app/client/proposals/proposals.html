@@ -1,0 +1,78 @@
+<main class="proposals-page">
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">Client workspace</p>
+      <h1>View Proposals</h1>
+      <p>Review applicants and assign freelancers to your projects.</p>
+    </div>
+
+    <button type="button" class="secondary-button" routerLink="/client">Dashboard</button>
+  </section>
+
+  <section class="summary-card">
+    <span>Projects With Applicants</span>
+    <strong>{{ projects.length }}</strong>
+  </section>
+
+  @if (projects.length === 0) {
+    <section class="empty-state">
+      <h2>No proposals yet</h2>
+      <p>Applications from freelancers will appear here once they apply to your projects.</p>
+    </section>
+  }
+
+  <section class="project-list">
+    @for (project of projects; track project.projectId) {
+      <article class="project-card">
+        <div class="project-header">
+          <div>
+            <p class="eyebrow">Project</p>
+            <h2>{{ project.title }}</h2>
+          </div>
+
+          <span class="applicant-count">
+            {{ project.applicants.length }} Applicant(s)
+          </span>
+        </div>
+
+        @if (project.applicants.length === 0) {
+          <div class="empty-message">
+            No applications received yet.
+          </div>
+        } @else {
+          <div class="applicant-list">
+            @for (applicant of project.applicants; track applicant.applicationId) {
+              <div class="applicant-card">
+                <div class="applicant-header">
+                  <div>
+                    <h3>{{ applicant.username }}</h3>
+                    <span class="status-badge" [class.accepted]="applicant.status === 'Accepted'" [class.rejected]="applicant.status === 'Rejected'">
+                      {{ applicant.status }}
+                    </span>
+                  </div>
+
+                  @if (applicant.status === 'Pending') {
+                    <button type="button" (click)="accept(applicant.applicationId)">
+                      Accept Freelancer
+                    </button>
+                  }
+
+                  @if (applicant.status === 'Accepted') {
+                    <span class="assigned-badge">Assigned</span>
+                  }
+                </div>
+
+                <div class="applicant-details">
+                  <p><strong>Score</strong><span>{{ applicant.overallScore }}</span></p>
+                  <p><strong>Rating</strong><span>{{ applicant.rating }}</span></p>
+                  <p><strong>Completed Projects</strong><span>{{ applicant.completedProjects }}</span></p>
+                  <p><strong>Skills</strong><span>{{ applicant.skills }}</span></p>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </article>
+    }
+  </section>
+</main>

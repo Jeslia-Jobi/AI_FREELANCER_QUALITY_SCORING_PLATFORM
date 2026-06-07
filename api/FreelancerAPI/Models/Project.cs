@@ -6,6 +6,8 @@ namespace FreelancerAPI.Models
 
         public int ClientId { get; set; }
 
+        public int FreelancerId { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }

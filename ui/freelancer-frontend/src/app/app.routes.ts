@@ -39,7 +39,12 @@ export const routes = [
     path: 'my-projects',
     component: MyProjects
   },
-  
+  {
+    path: 'proposals',
+    loadComponent: () =>
+      import('./client/proposals/proposals')
+        .then(m => m.Proposals)
+  },
 
   { path: '**', redirectTo: 'login' }
 ];
