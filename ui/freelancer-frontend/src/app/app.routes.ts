@@ -45,6 +45,12 @@ export const routes = [
       import('./client/proposals/proposals')
         .then(m => m.Proposals)
   },
+  {
+    path: 'assigned-projects',
+    loadComponent: () =>
+      import('./freelancer/assigned-projects/assigned-projects')
+        .then(m => m.AssignedProjects)
+  },
 
   { path: '**', redirectTo: 'login' }
 ];

@@ -111,11 +111,29 @@ namespace FreelancerAPI.Controllers
                         MatchPercentage = Math.Round(matchPercentage, 2)
                     };
                 })
-                .Where(r => r.MatchPercentage > 0)
+                .Where(r => r.MatchPercentage >= 50)
                 .OrderByDescending(r => r.MatchPercentage)
                 .ToList();
 
             return Ok(recommendations);
+        }
+
+        [Authorize(Roles = "Freelancer")]
+        [HttpGet("assigned")]
+        public IActionResult GetAssignedProjects()
+        {
+            var freelancerId = int.Parse(
+                User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            );
+
+            var projects = _context.Projects
+                .Where(p =>
+                    p.FreelancerId == freelancerId &&
+                    p.Status == "Assigned"
+                )
+                .ToList();
+
+            return Ok(projects);
         }
     }
 }

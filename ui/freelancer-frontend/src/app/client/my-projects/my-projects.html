@@ -78,6 +78,7 @@
         <div class="project-meta">
           <span>Budget: Rs. {{ project.budget }}</span>
           <span>Status: {{ project.status }}</span>
+          <span>Deadline: {{ project.deadline | date:'dd MMM yyyy' }}</span>
         </div>
       </article>
     }

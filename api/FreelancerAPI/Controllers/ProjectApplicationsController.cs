@@ -27,6 +27,19 @@ namespace FreelancerAPI.Controllers
                 User.FindFirst(ClaimTypes.NameIdentifier)?.Value
             );
 
+            var project = _context.Projects
+                .FirstOrDefault(p => p.ProjectId == projectId);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            if (project.Status == "Assigned")
+            {
+                return BadRequest("Project already assigned.");
+            }
+
              var alreadyApplied = _context.ProjectApplications.Any(
                 a => a.ProjectId == projectId &&
                     a.FreelancerId == freelancerId

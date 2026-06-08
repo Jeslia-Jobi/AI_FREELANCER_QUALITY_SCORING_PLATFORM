@@ -1,0 +1,131 @@
+<main class="projects-page">
+
+  <section class="page-header">
+
+    <div>
+      <p class="eyebrow">
+        Freelancer Workspace
+      </p>
+
+      <h1>
+        Assigned Projects
+      </h1>
+
+      <p>
+        Projects currently assigned to you.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      routerLink="/freelancer">
+
+      Dashboard
+
+    </button>
+
+  </section>
+
+  <section class="summary-card">
+
+    <span>
+      Assigned Projects
+    </span>
+
+    <strong>
+      {{ projects.length }}
+    </strong>
+
+  </section>
+
+  @if (projects.length === 0) {
+
+    <section class="empty-state">
+
+      <h2>
+        No Assigned Projects
+      </h2>
+
+      <p>
+        Projects assigned by clients will
+        appear here.
+      </p>
+
+      <button
+        type="button"
+        routerLink="/freelancer">
+
+        Dashboard
+
+      </button>
+
+    </section>
+
+  }
+
+  <section class="project-list">
+
+    @for (
+      project of projects;
+      track project.projectId
+    ) {
+
+      <article class="project-card">
+
+        <div class="project-body">
+
+          <h2>{{ project.title }}</h2>
+
+          <p>{{ project.description }}</p>
+
+          @if (project.requirements) {
+
+            <div class="project-requirements">
+
+              <span>Requirements</span>
+
+              <p>{{ project.requirements }}</p>
+
+            </div>
+
+          }
+
+        </div>
+
+        <div class="project-meta">
+
+          <span>
+            Budget:
+            Rs. {{ project.budget }}
+          </span>
+
+          <span>
+            Deadline:
+            {{ project.deadline | date:'dd MMM yyyy' }}
+          </span>
+
+          <span>
+            Status:
+            {{ project.status }}
+          </span>
+
+        </div>
+
+        <div class="project-actions">
+
+          <button
+            type="button"
+            class="complete-btn"
+          >
+            Mark Completed
+          </button>
+
+        </div>
+
+      </article>
+
+    }
+
+  </section>
+
+</main>

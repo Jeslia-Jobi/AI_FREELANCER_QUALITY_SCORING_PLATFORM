@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -20,5 +20,19 @@ export class ProjectService {
 
   getAllProjects(){
     return this.http.get(this.apiUrl);
+  }
+
+  getAssignedProjects() {
+
+    const token = localStorage.getItem('token');
+
+    return this.http.get(
+      this.apiUrl + '/assigned',
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`
+        })
+      }
+    );
   }
 }

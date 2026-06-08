@@ -6,6 +6,7 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { ProjectService } from '../services/project';
 import { FreelancerProfileService } from '../services/freelancer-profile';
@@ -15,7 +16,7 @@ import { ProjectApplicationService } from '../services/project-application';
 @Component({
   selector: 'app-freelancer',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './freelancer.html',
   styleUrl: './freelancer.css'
 })

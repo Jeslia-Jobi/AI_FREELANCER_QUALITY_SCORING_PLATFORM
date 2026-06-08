@@ -1,0 +1,264 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3ecdf;
+  color: #001b3f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.projects-page {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 32px 24px;
+  box-sizing: border-box;
+}
+
+.page-header,
+.summary-card,
+.project-card,
+.empty-state {
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: #fffdf8;
+  box-shadow: 0 18px 38px rgba(84, 69, 48, 0.12);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #bf5b1f;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.page-header p:not(.eyebrow),
+.project-body p,
+.empty-state p {
+  color: #665f55;
+}
+
+button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 6px;
+  background: #bf5b1f;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #9f4215;
+  transform: translateY(-1px);
+}
+
+.summary-card {
+  display: inline-grid;
+  min-width: 190px;
+  padding: 20px 22px;
+  margin-bottom: 18px;
+}
+
+.summary-card span {
+  margin-bottom: 10px;
+  color: #665f55;
+  font-size: 14px;
+}
+
+.summary-card strong {
+  color: #001b3f;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.project-list {
+  display: grid;
+  gap: 14px;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: start;
+  padding: 22px;
+}
+
+.project-body h2 {
+  margin-bottom: 8px;
+  color: #001b3f;
+  font-size: 20px;
+}
+
+.project-body p {
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.project-requirements {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #eee3d5;
+}
+
+.project-requirements span {
+  display: block;
+  margin-bottom: 6px;
+  color: #bf5b1f;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-requirements p {
+  color: #373229;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.project-meta span {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #f9ead9;
+  color: #9f4215;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.empty-state {
+  padding: 28px;
+  text-align: center;
+}
+
+.empty-state h2 {
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  margin-bottom: 18px;
+}
+
+.recommendation-section {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #eee3d5;
+}
+
+.recommendation-section h3 {
+  margin-bottom: 14px;
+  color: #bf5b1f;
+  font-size: 16px;
+}
+
+.recommendation-card {
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #e7d9c8;
+  border-radius: 8px;
+  background: #fdf8f1;
+}
+
+.recommendation-card h4 {
+  margin: 0 0 10px;
+  color: #001b3f;
+  font-size: 18px;
+}
+
+.recommendation-card p {
+  margin: 6px 0;
+  color: #4b443b;
+  line-height: 1.5;
+}
+
+.recommendation-card strong {
+  color: #001b3f;
+}
+
+@media (max-width: 720px) {
+  .projects-page {
+    padding: 22px 18px;
+  }
+
+  .page-header,
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    display: grid;
+  }
+
+  .project-meta {
+    justify-content: flex-start;
+  }
+}
+
+.project-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.complete-btn {
+  background: #001b3f;
+  color: #f3ecdf;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.complete-btn:hover {
+  transform: translateY(-2px);
+}
+
+.project-requirements {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(0, 27, 63, 0.06);
+}
+
+.project-requirements span {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.project-requirements p {
+  margin: 0;
+  line-height: 1.5;
+}

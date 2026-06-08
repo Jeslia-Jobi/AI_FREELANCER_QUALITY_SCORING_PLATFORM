@@ -119,6 +119,12 @@
 
       </section>
 
+      <button
+        type="button"
+        routerLink="/assigned-projects">
+        My Assigned Projects
+      </button>
+
       <section class="project-list">
 
         @for (project of projects; track project.projectId) {
@@ -139,11 +145,27 @@
                 Status: {{ project.status }}
               </span>
 
+              <span>
+                Deadline:
+                {{ project.deadline | date:'dd MMM yyyy' }}
+              </span>
+
             </div>
 
-            <button (click)="applyToProject(project.projectId)">
-              Apply
-            </button>
+            @if(project.status === 'Open'){
+
+              <button
+                (click)="applyToProject(project.projectId)">
+                Apply
+              </button>
+
+            } @else {
+
+              <button disabled>
+                Assigned
+              </button>
+
+            }
 
           </article>
 
