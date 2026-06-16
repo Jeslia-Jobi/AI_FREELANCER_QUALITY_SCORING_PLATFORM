@@ -16,5 +16,10 @@ namespace FreelancerAPI.Data
             : base(options)
         {
         }
+        public DbSet<Review> Reviews
+        {
+            get;
+            set;
+        }
     }
 }

@@ -45,6 +45,8 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+
+
 app.UseCors("AllowAngular");
 
 app.UseAuthentication();

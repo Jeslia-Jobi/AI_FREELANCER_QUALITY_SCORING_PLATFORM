@@ -54,7 +54,28 @@ namespace FreelancerAPI.Controllers
         [HttpGet]
         public IActionResult GetAllProjects()
         {
-            return Ok(_context.Projects.ToList());
+            var projects = _context.Projects
+                .Where(p => p.Status == "Open")
+                .ToList();
+
+            return Ok(projects);
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult GetProject(int id)
+        {
+            var project = _context.Projects
+                .FirstOrDefault(
+                    p => p.ProjectId == id
+                );
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(project);
         }
 
         [HttpGet("{projectId}/recommendations")]
@@ -134,6 +155,107 @@ namespace FreelancerAPI.Controllers
                 .ToList();
 
             return Ok(projects);
+        }
+
+        [Authorize(Roles = "Freelancer")]
+        [HttpGet("completed")]
+        public IActionResult GetCompletedProjects()
+        {
+            var freelancerId = int.Parse(
+                User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            );
+
+            var projects = _context.Projects
+                .Where(p =>
+                    p.FreelancerId == freelancerId &&
+                    p.Status == "Completed"
+                )
+                .ToList();
+
+            return Ok(projects);
+        }
+
+        [Authorize(Roles = "Freelancer")]
+        [HttpPut("{projectId}/request-completion")]
+        public IActionResult RequestCompletion(
+            int projectId)
+        {
+            var freelancerId = int.Parse(
+                User.FindFirst(
+                    ClaimTypes.NameIdentifier
+                )?.Value
+            );
+
+            var project = _context.Projects
+                .FirstOrDefault(
+                    p => p.ProjectId == projectId
+                    && p.FreelancerId == freelancerId
+                );
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            project.Status =
+                "Completion Requested";
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [Authorize(Roles = "Client")]
+        [HttpPost("review")]
+        public IActionResult SubmitReview(
+            Review review)
+        {
+            review.CreatedAt = DateTime.UtcNow;
+
+            _context.Reviews.Add(review);
+
+
+            var project = _context.Projects
+                .FirstOrDefault(
+                    p => p.ProjectId == review.ProjectId
+                );
+
+            if (project != null)
+            {
+                project.Status = "Completed";
+            }
+
+            var profile = _context.FreelancerProfiles
+                .FirstOrDefault(
+                    p => p.UserId == review.FreelancerId
+                );
+
+            if (profile != null)
+            {
+                profile.CompletedProjects++;
+
+                _context.SaveChanges();
+
+                profile.Rating = _context.Reviews
+                    .Where(
+                        r => r.FreelancerId ==
+                        review.FreelancerId
+                    )
+                    .Average(
+                        r => r.Rating
+                    );
+
+                profile.OverallScore = Math.Min(100,
+                    (profile.Rating * 20)+(profile.CompletedProjects * 2)
+                );
+            }
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message = "Review submitted successfully"
+            });
         }
     }
 }

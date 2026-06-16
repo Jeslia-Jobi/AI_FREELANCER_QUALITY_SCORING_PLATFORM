@@ -35,4 +35,24 @@ export class ProjectService {
       }
     );
   }
+
+  requestCompletion(projectId: number) {
+
+    return this.http.put(
+      `${this.apiUrl}/${projectId}/request-completion`,
+      {}
+    );
+  }
+
+  getProject(id: number) {
+    return this.http.get(
+      `${this.apiUrl}/${id}`
+    );
+  }
+
+  getCompletedProjects() {
+    return this.http.get(
+      `${this.apiUrl}/completed`
+    );
+  }
 }

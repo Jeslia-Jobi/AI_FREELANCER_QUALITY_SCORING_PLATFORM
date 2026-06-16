@@ -104,6 +104,22 @@ namespace FreelancerAPI.Controllers
                 {
                     project.ProjectId,
                     project.Title,
+                    project.Status,
+                    project.Deadline,
+                    project.FreelancerId,
+
+                    AssignedFreelancer =
+                        _context.Users
+                        .Where(u =>
+                            u.Id ==
+                            project.FreelancerId
+                        )
+                        .Select(u => new
+                        {
+                            u.Id,
+                            u.Username
+                        })
+                        .FirstOrDefault(),
 
                     Applicants = _context.ProjectApplications
                     .Where(a => a.ProjectId == project.ProjectId)

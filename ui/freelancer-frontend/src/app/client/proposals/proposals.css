@@ -86,6 +86,16 @@ h1 {
   font-size: 20px;
 }
 
+.project-status {
+  margin-bottom: 4px;
+}
+
+.project-deadline {
+  margin-top: 6px;
+  color: #001b3f;
+  font-size: 0.95rem;
+}
+
 .applicant-count,
 .status-badge,
 .assigned-badge {

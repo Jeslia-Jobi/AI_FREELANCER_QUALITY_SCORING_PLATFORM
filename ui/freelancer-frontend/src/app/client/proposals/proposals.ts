@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 import { ProjectApplicationService }
 from '../../services/project-application';
@@ -18,7 +18,8 @@ export class Proposals implements OnInit {
 
   constructor(
     private applicationService: ProjectApplicationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -62,4 +63,13 @@ export class Proposals implements OnInit {
         }
       });
   }
+
+  reviewProject(project: any) {
+
+      this.router.navigate([
+        '/review-project',
+        project.projectId
+      ]);
+
+    }
 }

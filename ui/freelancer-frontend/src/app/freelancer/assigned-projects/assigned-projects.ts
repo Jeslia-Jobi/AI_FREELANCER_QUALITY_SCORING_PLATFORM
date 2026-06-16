@@ -7,8 +7,9 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-import { ProjectService }
-from '../../services/project';
+import { ProjectService } from '../../services/project';
+import { ReviewService } from '../../services/review';
+
 
 @Component({
   selector: 'app-assigned-projects',
@@ -23,15 +24,20 @@ from '../../services/project';
 export class AssignedProjects implements OnInit {
 
   projects: any[] = [];
+  completedProjects: any[] = [];
+  reviews: any[] = [];
 
   constructor(
     private projectService: ProjectService,
+    private reviewService: ReviewService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
 
     this.loadProjects();
+    this.loadCompletedProjects();
+    this.loadReviews();
 
   }
 
@@ -64,6 +70,70 @@ export class AssignedProjects implements OnInit {
 
         }
       });
+  }
+
+  loadCompletedProjects() {
+
+    this.projectService
+      .getCompletedProjects()
+      .subscribe({
+
+        next: (res: any) => {
+          this.completedProjects = [...res];
+
+          this.cdr.detectChanges();
+        },
+
+        error: (err) => {
+          console.log(err);
+        }
+
+      });
+
+  }
+
+  requestCompletion(
+    projectId: number
+  ) {
+
+    this.projectService
+      .requestCompletion(projectId)
+      .subscribe({
+
+        next: () => {
+
+          alert(
+            'Completion request sent'
+          );
+
+          this.loadProjects();
+        },
+
+        error: (err) => {
+
+          console.log(err);
+
+        }
+      });
+
+  }
+
+  loadReviews() {
+
+    this.reviewService
+      .getMyReviews()
+      .subscribe({
+
+        next: (res: any) => {
+          this.reviews = res;
+        },
+
+        error: (err) => {
+          console.log(err);
+        }
+
+      });
+
   }
 
 }

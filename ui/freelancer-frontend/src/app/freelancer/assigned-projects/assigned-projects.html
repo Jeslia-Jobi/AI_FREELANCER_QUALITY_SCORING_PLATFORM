@@ -38,7 +38,7 @@
 
   </section>
 
-  @if (projects.length === 0) {
+  @if (projects.length === 0 && completedProjects.length === 0) {
 
     <section class="empty-state">
 
@@ -60,8 +60,76 @@
       </button>
 
     </section>
-
+    
   }
+
+  @if (completedProjects.length > 0) {
+
+  <section class="completed-section">
+
+    <h2>Completed Projects</h2>
+
+    @for (
+      project of completedProjects;
+      track project.projectId
+    ) {
+
+      <article class="project-card">
+
+        <h3>{{ project.title }}</h3>
+
+        <p>{{ project.description }}</p>
+
+        <h2>Client Reviews</h2>
+
+        @if (reviews.length === 0) {
+
+          <p>No reviews yet.</p>
+
+        }
+
+        @for (review of reviews; track review.createdAt) {
+
+          <article class="review-card">
+
+            <h3>
+              {{ review.title }}
+            </h3>
+
+            <p>
+              Rating:
+              {{ review.rating }}/5
+            </p>
+
+            <p>
+              "{{ review.feedback }}"
+            </p>
+
+          </article>
+
+        }
+
+        <div class="project-meta">
+
+          <span>
+            Budget:
+            Rs. {{ project.budget }}
+          </span>
+
+          <span>
+            Status:
+            {{ project.status }}
+          </span>
+
+        </div>
+
+      </article>
+
+    }
+
+  </section>
+
+}
 
   <section class="project-list">
 
@@ -115,7 +183,9 @@
 
           <button
             type="button"
-            class="complete-btn"
+            (click)="requestCompletion(
+              project.projectId
+            )"
           >
             Mark Completed
           </button>
