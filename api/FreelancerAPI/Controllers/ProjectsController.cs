@@ -177,8 +177,7 @@ namespace FreelancerAPI.Controllers
 
         [Authorize(Roles = "Freelancer")]
         [HttpPut("{projectId}/request-completion")]
-        public IActionResult RequestCompletion(
-            int projectId)
+        public IActionResult RequestCompletion(int projectId)
         {
             var freelancerId = int.Parse(
                 User.FindFirst(
@@ -258,65 +257,5 @@ namespace FreelancerAPI.Controllers
             });
         }
 
-        [HttpGet("{projectId}/recommendations")]
-        public IActionResult GetRecommendations(int projectId)
-        {
-            var project = _context.Projects.FirstOrDefault(p => p.ProjectId == projectId);
-
-            if (project == null)
-            {
-                return NotFound("Project not found");
-            }
-
-            var requiredSkills = project.Requirements
-                .ToLower()
-                .Split(',')
-                .Select(s => s.Trim())
-                .ToList();
-
-           var freelancerData = _context.FreelancerProfiles
-                .Join(
-                    _context.Users,
-                    freelancer => freelancer.UserId,
-                    user => user.Id,
-                    (freelancer, user) => new
-                    {
-                        Freelancer = freelancer,
-                        Username = user.Username
-                    }
-                )
-                .ToList();
-
-            var recommendations = freelancerData
-                .Select(f =>
-                {
-                    var freelancerSkills = f.Freelancer.Skills
-                        .ToLower()
-                        .Split(',')
-                        .Select(s => s.Trim())
-                        .ToList();
-
-                    int matchedSkills = requiredSkills
-                        .Count(skill => freelancerSkills.Contains(skill));
-
-                    double matchPercentage =
-                        ((double)matchedSkills / requiredSkills.Count) * 100;
-
-                    return new RecommendationDto
-                    {
-                        FreelancerId = f.Freelancer.ProfileId,
-                        UserId = f.Freelancer.UserId,
-                        Username = f.Username,
-                        Bio = f.Freelancer.Bio,
-                        Skills = f.Freelancer.Skills,
-                        MatchPercentage = Math.Round(matchPercentage, 2)
-                    };
-                })
-                .Where(r => r.MatchPercentage > 0)
-                .OrderByDescending(r => r.MatchPercentage)
-                .ToList();
-
-            return Ok(recommendations);
-        }
     }
 }
