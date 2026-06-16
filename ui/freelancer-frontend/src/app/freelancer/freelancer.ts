@@ -6,14 +6,17 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { ProjectService } from '../services/project';
 import { FreelancerProfileService } from '../services/freelancer-profile';
 
+import { ProjectApplicationService } from '../services/project-application';
+
 @Component({
   selector: 'app-freelancer',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './freelancer.html',
   styleUrl: './freelancer.css'
 })
@@ -35,6 +38,7 @@ export class Freelancer implements OnInit {
   constructor(
     private projectService: ProjectService,
     private profileService: FreelancerProfileService,
+    private applicationService: ProjectApplicationService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -109,6 +113,27 @@ export class Freelancer implements OnInit {
 
         error: (err) => {
           console.log(err);
+        }
+      });
+  }
+
+  applyToProject(projectId: number) {
+
+    this.applicationService.apply(projectId)
+      .subscribe({
+
+        next: (res) => {
+
+          console.log(res);
+
+          alert('Applied Successfully');
+        },
+
+        error: (err) => {
+
+          console.log(err);
+
+          alert('Application Failed');
         }
       });
   }

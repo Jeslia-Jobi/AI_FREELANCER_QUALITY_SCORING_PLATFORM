@@ -1,0 +1,59 @@
+<main class="review-page">
+
+  <section class="page-header">
+
+    <div>
+      <p class="eyebrow">Client Workspace</p>
+
+      <h1>Review Project</h1>
+
+      <p>
+        Rate the freelancer and
+        complete the project.
+      </p>
+    </div>
+
+  </section>
+
+  <section class="review-card">
+
+    <h2>{{ project?.title }}</h2>
+
+    <p>
+      Freelancer:
+      <strong>
+        {{ project?.assignedFreelancer?.username }}
+      </strong>
+    </p>
+
+    <label>Rating</label>
+
+    <select [(ngModel)]="review.rating">
+
+      <option [value]="1">1</option>
+      <option [value]="2">2</option>
+      <option [value]="3">3</option>
+      <option [value]="4">4</option>
+      <option [value]="5">5</option>
+
+    </select>
+
+    <label>Feedback</label>
+
+    <textarea
+      [(ngModel)]="review.feedback"
+      rows="5"
+      placeholder="Enter feedback">
+    </textarea>
+
+    <button
+      type="button"
+      (click)="submitReview()">
+
+      Submit Review
+
+    </button>
+
+  </section>
+
+</main>

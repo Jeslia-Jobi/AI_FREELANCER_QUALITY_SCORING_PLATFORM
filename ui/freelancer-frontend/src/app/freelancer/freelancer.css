@@ -245,3 +245,18 @@ button:hover {
     flex-direction: column;
   }
 }
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.skill-tag {
+  background: #e8eef7;
+  color: #001b3f;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}

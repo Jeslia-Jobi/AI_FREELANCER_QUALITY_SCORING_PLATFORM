@@ -453,6 +453,7 @@ C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\Fr
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.csproj.CoreCompileInputs.cache
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.sourcelink.json
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -468,4 +469,3 @@ C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\re
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.pdb
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.genruntimeconfig.cache
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\ref\FreelancerAPI.dll
-C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.sourcelink.json

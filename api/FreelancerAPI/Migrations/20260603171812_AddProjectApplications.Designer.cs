@@ -3,6 +3,7 @@ using System;
 using FreelancerAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreelancerAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260603171812_AddProjectApplications")]
+    partial class AddProjectApplications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.5");
@@ -85,9 +88,6 @@ namespace FreelancerAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("FreelancerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Requirements")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -154,36 +154,6 @@ namespace FreelancerAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Review", b =>
-                {
-                    b.Property<int>("ReviewId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Feedback")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("FreelancerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("SentimentScore")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("ReviewId");
-
-                    b.ToTable("Reviews");
                 });
 #pragma warning restore 612, 618
         }

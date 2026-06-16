@@ -119,6 +119,12 @@
 
       </section>
 
+      <button
+        type="button"
+        routerLink="/assigned-projects">
+        My Assigned Projects
+      </button>
+
       <section class="project-list">
 
         @for (project of projects; track project.projectId) {
@@ -128,6 +134,18 @@
             <h2>{{ project.title }}</h2>
 
             <p>{{ project.description }}</p>
+
+            <div class="requirements-section">
+              <h4>Requirements</h4>
+
+              <div class="skill-tags">
+                @for (skill of project.requirements.split(','); track skill) {
+                  <span class="skill-tag">
+                    {{ skill.trim() }}
+                  </span>
+                }
+              </div>
+            </div>
 
             <div class="project-meta">
 
@@ -139,11 +157,27 @@
                 Status: {{ project.status }}
               </span>
 
+              <span>
+                Deadline:
+                {{ project.deadline | date:'dd MMM yyyy' }}
+              </span>
+
             </div>
 
-            <button>
-              Apply
-            </button>
+            @if(project.status === 'Open'){
+
+              <button
+                (click)="applyToProject(project.projectId)">
+                Apply
+              </button>
+
+            } @else {
+
+              <button disabled>
+                Assigned
+              </button>
+
+            }
 
           </article>
 

@@ -143,7 +143,7 @@ button:hover {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 2px;
 }
 
 .project-meta span {
@@ -182,8 +182,6 @@ button:hover {
 }
 
 .recommendation-card {
-  width: 100%;
-  box-sizing: border-box;
   padding: 14px 16px;
   margin-bottom: 12px;
   border: 1px solid #e7d9c8;
@@ -224,4 +222,44 @@ button:hover {
   .project-meta {
     justify-content: flex-start;
   }
+}
+
+.project-actions {
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.complete-btn {
+  background: #001b3f;
+  color: #f3ecdf;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.complete-btn:hover {
+  transform: translateY(-2px);
+}
+
+.project-requirements {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(0, 27, 63, 0.06);
+}
+
+.project-requirements span {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.project-requirements p {
+  margin: 0;
+  line-height: 1.5;
 }

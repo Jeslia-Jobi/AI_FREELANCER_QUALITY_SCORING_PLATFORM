@@ -35,6 +35,12 @@
               <p>{{ project.requirements }}</p>
             </div>
           }
+
+          <div class="project-meta">
+            <span>Budget: Rs. {{ project.budget }}</span>
+            <span>Status: {{ project.status }}</span>
+            <span>Deadline: {{ project.deadline | date:'dd MMM yyyy' }}</span>
+          </div>
           
           <div class="recommendation-section">
 
@@ -73,11 +79,6 @@
           </div>
           
           
-        </div>
-
-        <div class="project-meta">
-          <span>Budget: Rs. {{ project.budget }}</span>
-          <span>Status: {{ project.status }}</span>
         </div>
       </article>
     }

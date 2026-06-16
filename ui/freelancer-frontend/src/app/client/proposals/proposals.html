@@ -1,0 +1,278 @@
+<main class="proposals-page">
+
+  <section class="page-header">
+
+    <div>
+      <p class="eyebrow">Client workspace</p>
+
+      <h1>View Proposals</h1>
+
+      <p>
+        Review applicants and manage assigned freelancers.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="secondary-button"
+      routerLink="/client">
+
+      Dashboard
+
+    </button>
+
+  </section>
+
+  <section class="summary-card">
+
+    <span>Projects</span>
+
+    <strong>{{ projects.length }}</strong>
+
+  </section>
+
+  @if (projects.length === 0) {
+
+    <section class="empty-state">
+
+      <h2>No projects found</h2>
+
+      <p>
+        Applications and assignments will appear here.
+      </p>
+
+    </section>
+
+  }
+
+  <section class="project-list">
+
+    @for (
+      project of projects;
+      track project.projectId
+    ) {
+
+      <article class="project-card">
+
+        <div class="project-header">
+
+          <div>
+
+            <p class="eyebrow">Project</p>
+
+            <h2>{{ project.title }}</h2>
+
+            <p class="project-status">
+              Status: {{ project.status }}
+            </p>
+
+            <p class="project-deadline">
+              Deadline:
+              {{ project.deadline | date:'dd MMM yyyy' }}
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- OPEN PROJECTS -->
+
+        @if (project.status === 'Open') {
+
+          <span class="applicant-count">
+            {{ project.applicants.length }}
+            Applicant(s)
+          </span>
+
+          @if (
+            project.applicants.length === 0
+          ) {
+
+            <div class="empty-message">
+
+              No applications received yet.
+
+            </div>
+
+          } @else {
+
+            <div class="applicant-list">
+
+              @for (
+                applicant of project.applicants;
+                track applicant.applicationId
+              ) {
+
+                <div class="applicant-card">
+
+                  <div class="applicant-header">
+
+                    <div>
+
+                      <h3>
+                        {{ applicant.username }}
+                      </h3>
+
+                      <span
+                        class="status-badge"
+                        [class.accepted]="
+                          applicant.status ===
+                          'Accepted'
+                        "
+                        [class.rejected]="
+                          applicant.status ===
+                          'Rejected'
+                        ">
+
+                        {{ applicant.status }}
+
+                      </span>
+
+                    </div>
+
+                    @if (
+                      applicant.status ===
+                      'Pending'
+                    ) {
+
+                      <button
+                        type="button"
+                        (click)="accept(
+                          applicant.applicationId
+                        )">
+
+                        Accept Freelancer
+
+                      </button>
+
+                    }
+
+                  </div>
+
+                  <div class="applicant-details">
+
+                    <p>
+                      <strong>Score</strong>
+                      <span>
+                        {{ applicant.overallScore }}
+                      </span>
+                    </p>
+
+                    <p>
+                      <strong>Rating</strong>
+                      <span>
+                        {{ applicant.rating }}
+                      </span>
+                    </p>
+
+                    <p>
+                      <strong>
+                        Completed Projects
+                      </strong>
+
+                      <span>
+                        {{ applicant.completedProjects }}
+                      </span>
+                    </p>
+
+                    <p>
+                      <strong>Skills</strong>
+
+                      <span>
+                        {{ applicant.skills }}
+                      </span>
+                    </p>
+
+                  </div>
+
+                </div>
+
+              }
+
+            </div>
+
+          }
+
+        }
+
+        <!-- ASSIGNED PROJECT -->
+
+        @if (
+          project.status === 'Assigned'
+        ) {
+
+          <div class="assigned-card">
+
+            <h3>Assigned Freelancer</h3>
+
+            <p>
+              {{ project.assignedFreelancer?.username }}
+            </p>
+
+            <span class="assigned-badge">
+              Project In Progress
+            </span>
+
+          </div>
+
+        }
+
+        <!-- COMPLETION REQUESTED -->
+
+        @if (
+          project.status ===
+          'Completion Requested'
+        ) {
+
+          <div class="assigned-card">
+
+            <h3>Assigned Freelancer</h3>
+
+            <p>
+              {{ project.assignedFreelancer?.username }}
+            </p>
+
+            <button
+              type="button"
+              (click)="reviewProject(project)"
+            >
+              Review Completion
+            </button>
+
+          </div>
+
+        }
+
+        <!-- COMPLETED -->
+
+        @if (
+          project.status ===
+          'Completed'
+        ) {
+
+          <div class="assigned-card">
+
+            <h3>Assigned Freelancer</h3>
+
+            <p>
+              {{ project.assignedFreelancer?.username }}
+            </p>
+
+            <span
+              class="status-badge accepted">
+
+              Project Completed
+
+            </span>
+
+          </div>
+
+        }
+
+      </article>
+
+    }
+
+  </section>
+
+</main>
