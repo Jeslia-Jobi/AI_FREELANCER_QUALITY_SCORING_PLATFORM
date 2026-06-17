@@ -1,0 +1,81 @@
+<main class="rankings-page">
+
+  <section class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        Freelancer Leaderboard
+      </p>
+
+      <h1>
+        Top Freelancers
+      </h1>
+
+      <p>
+        Rankings based on overall performance score.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      routerLink="/freelancer">
+
+      Dashboard
+
+    </button>
+
+  </section>
+
+  <section class="ranking-list">
+
+    @for (
+      freelancer of rankings;
+      track freelancer.userId;
+      let i = $index
+    ) {
+
+      <article class="ranking-card">
+
+        <div class="rank">
+        {{ i + 1 }}
+        </div>
+
+        <div class="details">
+
+          <h2>
+            {{ freelancer.username }}
+          </h2>
+
+          <p>
+            {{ freelancer.skills }}
+          </p>
+
+        </div>
+
+        <div class="stats">
+
+          <span>
+            Score:
+            {{ freelancer.overallScore }}
+          </span>
+
+          <span>
+            Rating:
+            {{ freelancer.rating }}
+          </span>
+
+          <span>
+            Projects:
+            {{ freelancer.completedProjects }}
+          </span>
+
+        </div>
+
+      </article>
+
+    }
+
+  </section>
+
+</main>
