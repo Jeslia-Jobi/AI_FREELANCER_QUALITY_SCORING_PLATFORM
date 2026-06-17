@@ -6,7 +6,7 @@ import { Freelancer } from './freelancer/freelancer';
 import { authGuard } from './auth-guard';
 import { MyProjects } from './client/my-projects/my-projects';
 import { CreateProject } from './client/create-project/create-project';
-
+import { Rankings } from './rankings/rankings';
 export const routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' as const },
 
@@ -58,6 +58,10 @@ export const routes = [
         './client/review-project/review-project'
       )
       .then(m => m.ReviewProject)
+  },
+  {
+    path: 'rankings',
+    component: Rankings
   },
 
   { path: '**', redirectTo: 'login' }

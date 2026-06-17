@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3ecdf;
+  color: #001b3f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.rankings-page {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-header {
+  background: #ffffff;
+  border: 1px solid #e5d7c4;
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.page-header button {
+  background: #c8631f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 22px;
+  cursor: pointer;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  color: #c8631f;
+  font-weight: 700;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ranking-card {
+  background: white;
+  border: 1px solid #e5d7c4;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rank {
+  font-size: 32px;
+  font-weight: bold;
+  min-width: 80px;
+}
+
+.details {
+  flex: 1;
+}
+
+.details h2 {
+  margin-bottom: 8px;
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stats span {
+  background: #f7e6d4;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #c8631f;
+}
