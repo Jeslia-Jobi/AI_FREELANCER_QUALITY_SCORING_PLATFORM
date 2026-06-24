@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using FreelancerAPI.Data;
+using FreelancerAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,8 +44,9 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
-var app = builder.Build();
+builder.Services.AddSingleton<SentimentService>();
 
+var app = builder.Build();
 
 
 app.UseCors("AllowAngular");

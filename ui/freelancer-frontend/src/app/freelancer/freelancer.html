@@ -167,11 +167,17 @@
 
             </div>
 
-            @if(project.status === 'Open'){
+            @if(project.status === 'Open' && !project.applied) {
 
               <button
                 (click)="applyToProject(project.projectId)">
                 Apply
+              </button>
+
+            } @else if (project.status === 'Open' && project.applied) {
+
+              <button disabled>
+                Applied
               </button>
 
             } @else {

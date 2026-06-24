@@ -1,5 +1,6 @@
 using FreelancerAPI.Data;
 using FreelancerAPI.Models;
+using FreelancerAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -13,10 +14,13 @@ namespace FreelancerAPI.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly SentimentService _sentimentService;
 
-        public ProjectsController(AppDbContext context)
+        public ProjectsController(AppDbContext context, SentimentService sentimentService
+        )
         {
             _context = context;
+           _sentimentService = sentimentService;
         }
 
         [Authorize(Roles = "Client")]
@@ -207,10 +211,21 @@ namespace FreelancerAPI.Controllers
 
         [Authorize(Roles = "Client")]
         [HttpPost("review")]
-        public IActionResult SubmitReview(
-            Review review)
+        public IActionResult SubmitReview(Review review)
         {
             review.CreatedAt = DateTime.UtcNow;
+
+            var sentiment =
+                _sentimentService
+                .Analyze(
+                    review.Feedback
+                );
+
+            review.SentimentScore =
+                sentiment.SentimentScore;
+
+            review.SentimentCategory =
+                sentiment.SentimentCategory;
 
             _context.Reviews.Add(review);
 
@@ -245,9 +260,47 @@ namespace FreelancerAPI.Controllers
                         r => r.Rating
                     );
 
-                profile.OverallScore = Math.Min(100,
-                    (profile.Rating * 20)+(profile.CompletedProjects * 2)
-                );
+                double avgSentiment =
+                    _context.Reviews
+                    .Where(r =>
+                        r.FreelancerId ==
+                        review.FreelancerId)
+                    .Average(r =>
+                        r.SentimentScore
+                    );
+
+                double ratingScore =
+                    profile.Rating * 15;
+
+                double completionScore =
+                    profile.CompletedProjects * 2;
+
+                double sentimentScore =
+                    ((avgSentiment / 10.0) + 1.0) * 15.0;
+
+                // Calculate late completion penalty
+                double latePenalty = 0;
+                if (project != null && review.CreatedAt > project.Deadline)
+                {
+                    var daysLate = (review.CreatedAt - project.Deadline).TotalDays;
+                    // 2 points penalty per day late, capped at 20 points
+                    latePenalty = Math.Min(20, daysLate * 2);
+                }
+
+                profile.OverallScore =
+                    Math.Max(
+                        0,
+                        Math.Min(
+                            100,
+                            ratingScore
+                            +
+                            completionScore
+                            +
+                            sentimentScore
+                            -
+                            latePenalty
+                        )
+                    );
             }
 
             _context.SaveChanges();

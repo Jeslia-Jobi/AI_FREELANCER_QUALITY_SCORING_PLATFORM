@@ -195,75 +195,54 @@
 
         }
 
-        <!-- ASSIGNED PROJECT -->
+        <!-- ASSIGNED / COMPLETION STATUS -->
 
         @if (
-          project.status === 'Assigned'
+          project.status === 'Assigned' ||
+          project.status === 'Completion Requested' ||
+          project.status === 'Completed'
         ) {
 
           <div class="assigned-card">
 
-            <h3>Assigned Freelancer</h3>
+            <div class="assigned-card-top">
 
-            <p>
-              {{ project.assignedFreelancer?.username }}
-            </p>
+              <div>
+                <h3>Assigned Freelancer</h3>
+                <p class="freelancer-name">
+                  {{ project.assignedFreelancer?.username }}
+                </p>
+                
+              </div>
 
-            <span class="assigned-badge">
-              Project In Progress
-            </span>
+            </div>
 
-          </div>
+            
 
-        }
+            <div class="assigned-card-footer">
 
-        <!-- COMPLETION REQUESTED -->
+              @if (project.status === 'Assigned') {
+                <span class="assigned-badge">
+                  Project In Progress
+                </span>
+              }
 
-        @if (
-          project.status ===
-          'Completion Requested'
-        ) {
+              @if (project.status === 'Completion Requested') {
+                <button
+                  type="button"
+                  (click)="reviewProject(project)"
+                >
+                  Review Completion
+                </button>
+              }
 
-          <div class="assigned-card">
+              @if (project.status === 'Completed') {
+                <span class="status-badge accepted">
+                  Project Completed
+                </span>
+              }
 
-            <h3>Assigned Freelancer</h3>
-
-            <p>
-              {{ project.assignedFreelancer?.username }}
-            </p>
-
-            <button
-              type="button"
-              (click)="reviewProject(project)"
-            >
-              Review Completion
-            </button>
-
-          </div>
-
-        }
-
-        <!-- COMPLETED -->
-
-        @if (
-          project.status ===
-          'Completed'
-        ) {
-
-          <div class="assigned-card">
-
-            <h3>Assigned Freelancer</h3>
-
-            <p>
-              {{ project.assignedFreelancer?.username }}
-            </p>
-
-            <span
-              class="status-badge accepted">
-
-              Project Completed
-
-            </span>
+            </div>
 
           </div>
 

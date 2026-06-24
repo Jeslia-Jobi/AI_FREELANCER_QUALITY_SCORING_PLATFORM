@@ -12,4 +12,5 @@ public class Review
 
     public DateTime CreatedAt{get; set;}
     public double SentimentScore { get; set; }
+    public string SentimentCategory { get; set; } = "";
 }

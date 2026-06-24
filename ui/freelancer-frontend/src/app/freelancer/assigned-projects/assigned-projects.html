@@ -82,13 +82,21 @@
 
         <h2>Client Reviews</h2>
 
-        @if (reviews.length === 0) {
+        @if (loadingReviews) {
+
+          <p>Loading reviews...</p>
+
+        }
+
+        @if (!reviewsByProject[project.projectId] || reviewsByProject[project.projectId].length === 0) {
 
           <p>No reviews yet.</p>
 
         }
 
-        @for (review of reviews; track review.createdAt) {
+        @if (reviewsByProject[project.projectId]) {
+
+          @for (review of reviewsByProject[project.projectId]; track review.createdAt) {
 
           <article class="review-card">
 
@@ -106,6 +114,8 @@
             </p>
 
           </article>
+
+        }
 
         }
 

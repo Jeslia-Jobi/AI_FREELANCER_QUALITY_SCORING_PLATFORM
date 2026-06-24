@@ -56,7 +56,10 @@ export class Freelancer implements OnInit {
 
         next: (res: any) => {
 
-          this.projects = [...res];
+          this.projects = res.map((project: any) => ({
+            ...project,
+            applied: false
+          }));
 
           this.cdr.detectChanges();
         },
@@ -126,6 +129,12 @@ export class Freelancer implements OnInit {
 
           console.log(res);
 
+          const project = this.projects.find(p => p.projectId === projectId);
+          if (project) {
+            project.applied = true;
+          }
+
+          this.cdr.detectChanges();
           alert('Applied Successfully');
         },
 
