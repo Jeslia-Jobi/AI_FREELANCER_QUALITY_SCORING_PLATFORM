@@ -12,7 +12,6 @@ namespace FreelancerAPI.Controllers
     public class ReviewsController : ControllerBase
     {
         private readonly AppDbContext _context;
-
         public ReviewsController(AppDbContext context)
         {
             _context = context;
@@ -27,6 +26,7 @@ namespace FreelancerAPI.Controllers
             );
 
             var reviews = _context.Reviews
+                .Where(review => review.FreelancerId == freelancerId)
                 .Join(
                     _context.Projects,
                     review => review.ProjectId,
@@ -39,15 +39,6 @@ namespace FreelancerAPI.Controllers
                         review.CreatedAt,
                         review.SentimentScore
                     }
-                )
-                .Where(r =>
-                    _context.Reviews.Any(x =>
-                        x.FreelancerId == freelancerId &&
-                        x.ProjectId ==
-                        _context.Projects
-                            .First(p => p.Title == r.Title)
-                            .ProjectId
-                    )
                 )
                 .ToList();
 

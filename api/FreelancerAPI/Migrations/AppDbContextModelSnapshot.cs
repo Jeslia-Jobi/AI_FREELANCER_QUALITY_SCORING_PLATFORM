@@ -178,6 +178,10 @@ namespace FreelancerAPI.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("SentimentCategory")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("SentimentScore")
                         .HasColumnType("REAL");
 
