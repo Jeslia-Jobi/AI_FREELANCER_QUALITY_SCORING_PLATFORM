@@ -43,7 +43,7 @@ namespace FreelancerAPI.Services
                     new SentimentInputWithLabel
                     {
                         Feedback = feedback,
-                        Label = ""  // Dummy value for model schema compatibility
+                        Label = ""  // Dummy value
                     }
                 );
 

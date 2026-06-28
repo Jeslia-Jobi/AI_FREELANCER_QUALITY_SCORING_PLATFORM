@@ -45,6 +45,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddSingleton<SentimentService>();
+builder.Services.AddScoped<ScoreService>();
 
 var app = builder.Build();
 
