@@ -8,9 +8,16 @@ using FreelancerAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=users.db"));
+if (builder.Environment.EnvironmentName == "Testing")
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseInMemoryDatabase("IntegrationTests"));
+}
+else
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlite("Data Source=users.db"));
+}
 
 builder.Services.AddCors(options =>
 {
@@ -45,6 +52,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddSingleton<SentimentService>();
+builder.Services.AddScoped<ScoreService>();
 
 var app = builder.Build();
 
@@ -57,3 +65,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public partial class Program { }

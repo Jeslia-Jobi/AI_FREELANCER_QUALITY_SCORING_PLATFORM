@@ -186,3 +186,4 @@ C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\bin\Debug\net10.0\Fr
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\bin\Debug\net10.0\FreelancerAPI.pdb
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\FreelancerAPI.genruntimeconfig.cache
 C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\obj\Debug\net10.0\ref\FreelancerAPI.dll
+C:\AI_Freelancer_Quality_Scoring_Platform\api\FreelancerAPI\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.InMemory.dll
